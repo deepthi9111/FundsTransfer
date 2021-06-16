@@ -3,6 +3,7 @@ package com.deepthi.fundstransfer.controller;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.when;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -61,12 +62,7 @@ class FundsControllerTest
 	@DisplayName("Funds Transfer : Negative Scenario1")
 	void testTransferFunds() 
 	{		
-		Account account=new Account();
-		account.setAcno(1673190501L);
-		account.setIfsc("AX0000500");
-		account.setBranch("Hyderabad");
-		account.setBalance(100.0);
-		account.setBank("Axis");
+		Account account=new Account(1673190501L,"AX0000500","Hyderabad",100.0,"Axis");
 
 		when(accountService.getAccountByAcno(account.getAcno())).thenReturn(Optional.of(account));
 		
@@ -147,12 +143,13 @@ class FundsControllerTest
 		beneficiaries.add(beneficiary);
 		
 		Double amount=500.0;
-		
-		Transactions transaction=new Transactions();
+		LocalDateTime time= LocalDateTime.now();
+		Transactions transaction=new Transactions(1L,sender.getAcno(),receiver.getAcno(),amount,time);
 		transaction.setAmount(amount);
 		transaction.setReceiver(receiver.getAcno());
 		transaction.setSender(sender.getAcno());
 		transaction.setTid(1L);
+		transaction.setTime(time);
 		
 		when(accountService.getAccountByAcno(sender.getAcno())).thenReturn(Optional.of(sender));
 		when(accountService.getAccountByAcno(receiver.getAcno())).thenReturn(Optional.of(receiver));
@@ -195,6 +192,40 @@ class FundsControllerTest
 		
 		ResponseEntity<String> updateBalance = fundsController.updateBalance(amount, customer.getId());
 		assertTrue(updateBalance.getStatusCodeValue()==200);
+	}
+	
+	@Test
+	@DisplayName("Check Account : Positive Scenario")
+	void testCheckAccount()
+	{
+		Account account=new Account();
+		account.setAcno(1673190501L);
+		account.setIfsc("AX0000500");
+		account.setBranch("Hyderabad");
+		account.setBalance(1000.0);
+		account.setBank("Axis");
+		
+		when(accountService.getAccountByAcno(account.getAcno())).thenReturn(Optional.of(account));
+		
+		ResponseEntity<String> checkAccount = fundsController.checkAccount(account.getAcno());
+		assertTrue(checkAccount.getStatusCodeValue()==200);
+	}
+	
+	@Test
+	@DisplayName("Check Account : Negative Scenario")
+	void testCheckAccount2()
+	{
+		Account account=new Account();
+		account.setAcno(1673190501L);
+		account.setIfsc("AX0000500");
+		account.setBranch("Hyderabad");
+		account.setBalance(1000.0);
+		account.setBank("Axis");
+		
+		when(accountService.getAccountByAcno(account.getAcno())).thenReturn(Optional.empty());
+		
+		ResponseEntity<String> checkAccount = fundsController.checkAccount(account.getAcno());
+		assertTrue(checkAccount.getStatusCodeValue()==404);
 	}
 
 }

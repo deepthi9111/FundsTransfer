@@ -58,13 +58,7 @@ class CustomerControllerTest
 	@DisplayName("Registration : Positive scenario")
 	void testAddCustomer() throws DuplicateEntryException 
 	{
-		Customer customer=new Customer();
-		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
-		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		Customer customer=new Customer(1L,"Mouni","8985478597","Kavali","mounika1998@gmail.com","mouni@1234");
 		
 		Account account=new Account();
 		account.setAcno(1673190501L);
@@ -129,6 +123,10 @@ class CustomerControllerTest
 	
 		customer.setAccount(account);
 		
+		Beneficiary beneficiary=new Beneficiary(1L,account,1673190502L,"AX0000500","Hyderabad","Axis","Triveni");
+		
+		beneficiaries.add(beneficiary);
+		
 		when(customerService.getCustomerByEmail(login.getEmail())).thenReturn(customer);
 		when(beneficiaryService.getAllBeneficiariesByAcno(account.getAcno())).thenReturn(beneficiaries);
 		
@@ -144,7 +142,9 @@ class CustomerControllerTest
 	void testLogCustomer2()
 	{
 		
-		CustomerLogin login=new CustomerLogin("amouni1998@gmail.com","mouni@1234");
+		CustomerLogin login=new CustomerLogin();
+		login.setEmail("mounika1998@gmail.com");
+		login.setPassword("mouni@1234");
 		
 		Customer customer=null;
 

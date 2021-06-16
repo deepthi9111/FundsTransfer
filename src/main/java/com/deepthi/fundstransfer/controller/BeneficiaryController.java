@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.deepthi.fundstransfer.entity.Account;
 import com.deepthi.fundstransfer.entity.Beneficiary;
 import com.deepthi.fundstransfer.entity.Customer;
+import com.deepthi.fundstransfer.exception.AccountNotFoundException;
 import com.deepthi.fundstransfer.exception.BeneficiaryExistsException;
 import com.deepthi.fundstransfer.exception.BeneficiaryNotFoundException;
-import com.deepthi.fundstransfer.exception.CustomerNotFoundException;
 import com.deepthi.fundstransfer.service.AccountService;
 import com.deepthi.fundstransfer.service.BeneficiaryService;
 import com.deepthi.fundstransfer.service.CustomerService;
@@ -40,7 +40,7 @@ public class BeneficiaryController
 	
 	@PostMapping("/customers/{id}/beneficiaries")
 	public ResponseEntity<String> addBeneficiary(@RequestBody Beneficiary beneficiary,
-												 @PathVariable Long id) throws BeneficiaryExistsException, CustomerNotFoundException
+												 @PathVariable Long id) throws BeneficiaryExistsException, AccountNotFoundException
 	{
 		Optional<Customer> customerById = customerService.getCustomerById(id);
 		
@@ -65,7 +65,7 @@ public class BeneficiaryController
 				
 		}
 		
-		Optional<Account> accountByAcno = getAccountByAcno(beneficiary.getAcno());
+		Optional<Account> accountByAcno = accountService.getAccountByAcno(beneficiary.getAcno());
 		
 		Account acntBeneficiary=new Account();
 		
@@ -79,7 +79,7 @@ public class BeneficiaryController
 				   !acntBeneficiary.getBank().equals(beneficiary.getBank()) || 
 				   !acntBeneficiary.getBranch().equals(beneficiary.getBranch()))
 		{
-			throw new CustomerNotFoundException("The bank details you entered are incorrect");
+			throw new AccountNotFoundException("The bank details you entered are incorrect");
 		}
 			
 		else
@@ -128,7 +128,7 @@ public class BeneficiaryController
 		}
 			
 		
-		beneficiaryService.deleteBeneficiary(getBeneficiaryByAcno(beneficiary.getAcno()).getBid());
+		beneficiaryService.deleteBeneficiary(beneficiaryService.getBeneficiaryByAcno(beneficiary.getAcno()).getBid());
 		
 		log.info("beneficiary deleted");
 		String message="Beneficiary has been deleted successfully";
@@ -137,15 +137,5 @@ public class BeneficiaryController
 		
 	}
 	
-	private Beneficiary getBeneficiaryByAcno(Long acno) 
-	{
-		return beneficiaryService.getBeneficiaryByAcno(acno);
-	}
-	
-	public Optional<Account> getAccountByAcno(Long acno) 
-	{
-		return accountService.getAccountByAcno(acno);
-		
-	}
 
 }

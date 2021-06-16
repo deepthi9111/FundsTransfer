@@ -30,7 +30,6 @@ public class AccountService
 
 	public Optional<Account> getAccountByAcno(Long acno) 
 	{
-		System.out.println("In service "+acno);
 		return accountRepository.findById(acno);
 	}
 

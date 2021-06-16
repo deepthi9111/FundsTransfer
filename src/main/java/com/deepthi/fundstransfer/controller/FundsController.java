@@ -145,19 +145,11 @@ public class FundsController
 		
 		if(accountByAcno.isPresent())
 		{
-			System.out.println("In funds controller "+acno);
 			message.append("Present");
 			return new ResponseEntity<>(message.toString(),HttpStatus.OK);
 		}
 		
 		return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-	}
-	
-	@GetMapping("/funds/api")
-	public ResponseEntity<String> sample()
-	{
-		String message="OK";
-		return new ResponseEntity<String>(message, HttpStatus.OK);
 	}
 	
 }

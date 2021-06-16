@@ -27,6 +27,7 @@ import org.springframework.http.ResponseEntity;
 import com.deepthi.fundstransfer.entity.Account;
 import com.deepthi.fundstransfer.entity.Beneficiary;
 import com.deepthi.fundstransfer.entity.Customer;
+import com.deepthi.fundstransfer.exception.AccountNotFoundException;
 import com.deepthi.fundstransfer.exception.BeneficiaryExistsException;
 import com.deepthi.fundstransfer.exception.BeneficiaryNotFoundException;
 import com.deepthi.fundstransfer.exception.CustomerNotFoundException;
@@ -56,7 +57,7 @@ class BeneficiaryControllerTest
 	@Test
 	@Order(1)
 	@DisplayName("Add Beneficiary : Positive Scenario")
-	void testAddBeneficiary() throws BeneficiaryExistsException, CustomerNotFoundException 
+	void testAddBeneficiary() throws BeneficiaryExistsException, CustomerNotFoundException, AccountNotFoundException 
 	{
 		List<Beneficiary> beneficiaries=new ArrayList<Beneficiary>();
 		
@@ -120,14 +121,7 @@ class BeneficiaryControllerTest
 		
 		customer.setAccount(account);
 		
-		Beneficiary beneficiary=new Beneficiary();
-		beneficiary.setBid(1L);
-		beneficiary.setAcno(1673190502L);
-		beneficiary.setBank("Axis");
-		beneficiary.setBranch("Hyderabad");
-		beneficiary.setIfsc("AX0000500");
-		beneficiary.setName("Triveni");
-		beneficiary.setAccount(account);
+		Beneficiary beneficiary=new Beneficiary(1L,account,1673190502L,"AX0000500","Hyderabad","Axis","Triveni");
 		
 		beneficiaries.add(beneficiary);
 		
@@ -140,7 +134,7 @@ class BeneficiaryControllerTest
 	}
 
 	@Test
-	@Order(3)
+	@Order(4)
 	@DisplayName("Delete Beneficiary : Positive Scenario")
 	void testDeleteBeneficiary() throws BeneficiaryNotFoundException 
 	{
@@ -192,7 +186,7 @@ class BeneficiaryControllerTest
 	}
 
 	@Test
-	@Order(4)
+	@Order(5)
 	@DisplayName("Delete Beneficiary : Positive Scenario")
 	void testDeleteBeneficiary2()
 	{

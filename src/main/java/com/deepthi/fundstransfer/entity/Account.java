@@ -89,19 +89,4 @@ public class Account
 	public void setBank(String bank) {
 		this.bank = bank;
 	}
-
-	@Override
-	public String toString() {
-		return "Account [acno=" + acno + ", ifsc=" + ifsc + ", branch=" + branch + ", balance=" + balance + ", bank="
-				+ bank + "]";
-	}
-
-	public List<Beneficiary> getBeneficiaryList() {
-		return beneficiaryList;
-	}
-
-	public void setBeneficiaryList(List<Beneficiary> beneficiaryList) {
-		this.beneficiaryList = beneficiaryList;
-	}
-
 }

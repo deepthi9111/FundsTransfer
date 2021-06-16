@@ -47,50 +47,24 @@ public class Transactions
 		this.time = time;
 	}
 
-	public Long getTid() {
-		return tid;
-	}
-
 	public void setTid(Long tid) {
 		this.tid = tid;
-	}
-
-	public Long getSender() {
-		return sender;
 	}
 
 	public void setSender(Long sender) {
 		this.sender = sender;
 	}
 
-	public Long getReceiver() {
-		return receiver;
-	}
-
 	public void setReceiver(Long receiver) {
 		this.receiver = receiver;
-	}
-
-	public Double getAmount() {
-		return amount;
 	}
 
 	public void setAmount(Double amount) {
 		this.amount = amount;
 	}
 
-	public LocalDateTime getTime() {
-		return time;
-	}
-
 	public void setTime(LocalDateTime time) {
 		this.time = time;
-	}
-	
-	@Override
-	public String toString() {
-		return "Transactions [tid=" + tid + ", sender=" + sender + ", receiver=" + receiver + ", amount=" + amount
-				+ ", time=" + time + "]";
 	}
 	
 }

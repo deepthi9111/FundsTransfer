@@ -38,6 +38,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler
 		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
 	}
 	
+	@ExceptionHandler(AccountNotFoundException.class)
+	public final ResponseEntity<Object> handleAccountNotFoundException(AccountNotFoundException ex, WebRequest req)
+	{
+		List<String> details=new ArrayList<>();
+		
+		details.add(ex.getLocalizedMessage());
+		ErrorResponse error=new ErrorResponse(400L,details);
+		
+		return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+	}
+	
 	@ExceptionHandler(BeneficiaryNotFoundException.class)
 	public final ResponseEntity<Object> handleBeneficiaryNotFoundException(BeneficiaryNotFoundException ex, WebRequest req)
 	{

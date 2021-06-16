@@ -97,10 +97,6 @@ public class Beneficiary
 		this.branch = branch;
 	}
 
-	public String getName() {
-		return name;
-	}
-
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -115,11 +111,9 @@ public class Beneficiary
 	}
 
 
-	@Override
-	public String toString() {
-		return "Beneficiary [bid=" + bid + ", account=" + account + ", acno=" + acno + ", ifsc=" + ifsc + ", branch="
-				+ branch + ", bank=" + bank + ", name=" + name + "]";
+	public String getName() 
+	{
+		return name;
 	}
 
-	
 }

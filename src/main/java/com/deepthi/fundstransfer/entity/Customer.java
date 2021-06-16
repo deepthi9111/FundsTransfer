@@ -79,16 +79,8 @@ public class Customer
 		this.name = name;
 	}
 
-	public String getPhone() {
-		return phone;
-	}
-
 	public void setPhone(String phone) {
 		this.phone = phone;
-	}
-
-	public String getCity() {
-		return city;
 	}
 
 	public void setCity(String city) {
@@ -119,18 +111,4 @@ public class Customer
 		this.account = account;
 	}
 
-	public List<Beneficiary> getBeneficiaries() {
-		return beneficiaries;
-	}
-
-	public void setBeneficiaries(List<Beneficiary> beneficiaries) {
-		this.beneficiaries = beneficiaries;
-	}
-
-	@Override
-	public String toString() {
-		return "Customer [id=" + id + ", name=" + name + ", phone=" + phone + ", city=" + city + ", email=" + email
-				+ ", password=" + password + ", account=" + account + ", beneficiaries=" + beneficiaries + "]";
-	}
-	
 }
