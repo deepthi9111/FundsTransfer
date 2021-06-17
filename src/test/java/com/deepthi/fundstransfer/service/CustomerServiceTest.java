@@ -39,11 +39,11 @@ class CustomerServiceTest
 	{
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		when(customerRepository.findByEmail(customer.getEmail())).thenReturn(customer);
 		
@@ -57,11 +57,11 @@ class CustomerServiceTest
 	{
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		when(customerRepository.save(customer)).thenReturn(customer);
 		
@@ -75,11 +75,11 @@ class CustomerServiceTest
 	{
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		when(customerRepository.findById(customer.getId())).thenReturn(Optional.of(customer));
 		

@@ -88,7 +88,12 @@
 	                    </goals>
 	                </execution>
 	            </executions>
-	         
+	         	<configuration>
+	         		<excludes>
+	         			<exclude>com.deepthi.fundstransfer.exception</exclude>
+	         			
+	         		</excludes>
+	         	</configuration>
         	</plugin>
 		</plugins>
 	</build>

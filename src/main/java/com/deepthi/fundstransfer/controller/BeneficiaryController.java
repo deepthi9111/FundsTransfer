@@ -61,38 +61,26 @@ public class BeneficiaryController
 			if(beneficiaries.getAcno().equals(beneficiary.getAcno()))
 			{
 				throw new BeneficiaryExistsException("Beneficiary already added");
-			}
-				
+			}		
 		}
 		
 		Optional<Account> accountByAcno = accountService.getAccountByAcno(beneficiary.getAcno());
 		
-		Account acntBeneficiary=new Account();
-		
-		if(accountByAcno.isPresent())
-		{
-			acntBeneficiary=accountByAcno.get();
-		}
-		
-		log.error("Bank details are incorrect");
-		if(acntBeneficiary == null || !acntBeneficiary.getIfsc().equals(beneficiary.getIfsc()) || 
-				   !acntBeneficiary.getBank().equals(beneficiary.getBank()) || 
-				   !acntBeneficiary.getBranch().equals(beneficiary.getBranch()))
+		if(!accountByAcno.isPresent())
 		{
 			throw new AccountNotFoundException("The bank details you entered are incorrect");
 		}
 			
-		else
-		{
-			beneficiary.setAccount(custAccount);
-			beneficiaryService.addBeneficiary(beneficiary);
-			
-			log.info("Beneficiary added");
-			
-			String message="Beneficiary has been added successfully";
-			
-			return new ResponseEntity<>(message, HttpStatus.OK);
-		}
+	
+		beneficiary.setAccount(custAccount);
+		beneficiaryService.addBeneficiary(beneficiary);
+		
+		log.info("Beneficiary added");
+		
+		String message="Beneficiary has been added successfully";
+		
+		return new ResponseEntity<>(message, HttpStatus.OK);
+
 	}
 
 	@DeleteMapping("/customers/{id}/beneficiaries")

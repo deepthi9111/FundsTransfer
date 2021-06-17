@@ -63,11 +63,11 @@ class BeneficiaryControllerTest
 		
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		Account account=new Account();
 		account.setAcno(1673190502L);
@@ -106,11 +106,11 @@ class BeneficiaryControllerTest
 		
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		Account account=new Account();
 		account.setAcno(1673190502L);
@@ -134,6 +134,41 @@ class BeneficiaryControllerTest
 	}
 
 	@Test
+	@Order(2)
+	@DisplayName("Add Beneficiary : Negative Scenario2")
+	void testAddBeneficiary3()
+	{
+		List<Beneficiary> beneficiaries=new ArrayList<Beneficiary>();
+		
+		Customer customer=new Customer();
+		customer.setId(1L);
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
+		customer.setPassword("mouni@1234");
+		customer.setCity("Hyderabad");
+		
+		Account account=new Account();
+		account.setAcno(1673190502L);
+		account.setIfsc("AX0000500");
+		account.setBranch("Hyderabad");
+		account.setBalance(1000.0);
+		account.setBank("Axis");
+		
+		customer.setAccount(account);
+		
+		Beneficiary beneficiary=new Beneficiary(1L,account,1673190500L,"AX0000500","Hyderabad","Axis","Triveni");
+		
+		when(customerService.getCustomerById(customer.getId())).thenReturn(Optional.of(customer));
+		when(beneficiaryService.getAllBeneficiariesByAcno(account.getAcno())).thenReturn(beneficiaries);
+		when(accountService.getAccountByAcno(beneficiary.getAcno())).thenReturn(Optional.empty());
+		
+		AccountNotFoundException e = assertThrows(AccountNotFoundException.class, ()->beneficiaryController.addBeneficiary(beneficiary, customer.getId()));
+		
+		assertEquals("The bank details you entered are incorrect", e.getMessage());
+	}
+	
+	@Test
 	@Order(4)
 	@DisplayName("Delete Beneficiary : Positive Scenario")
 	void testDeleteBeneficiary() throws BeneficiaryNotFoundException 
@@ -142,11 +177,11 @@ class BeneficiaryControllerTest
 		
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		Account account=new Account();
 		account.setAcno(1673190501L);
@@ -194,11 +229,11 @@ class BeneficiaryControllerTest
 		
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		Account account=new Account();
 		account.setAcno(1673190501L);

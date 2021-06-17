@@ -58,7 +58,7 @@ class CustomerControllerTest
 	@DisplayName("Registration : Positive scenario")
 	void testAddCustomer() throws DuplicateEntryException 
 	{
-		Customer customer=new Customer(1L,"Mouni","8985478597","Kavali","mounika1998@gmail.com","mouni@1234");
+		Customer customer=new Customer(1L,"Mounika","8985478597","Hyderabad","mounika@gmail.com","mouni@1234");
 		
 		Account account=new Account();
 		account.setAcno(1673190501L);
@@ -85,11 +85,11 @@ class CustomerControllerTest
 	{
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		when(customerService.getCustomerByEmail(customer.getEmail())).thenReturn(customer);
 		
@@ -108,11 +108,11 @@ class CustomerControllerTest
 		
 		Customer customer=new Customer();
 		customer.setId(1L);
-		customer.setName("Mouni");
-		customer.setPhone("7075725533");
-		customer.setEmail("amouni1998@gmail.com");
+		customer.setName("Mounika");
+		customer.setPhone("8985478597");
+		customer.setEmail("mounika@gmail.com");
 		customer.setPassword("mouni@1234");
-		customer.setCity("Kavali");
+		customer.setCity("Hyderabad");
 		
 		Account account=new Account();
 		account.setAcno(1673190501L);
@@ -143,7 +143,7 @@ class CustomerControllerTest
 	{
 		
 		CustomerLogin login=new CustomerLogin();
-		login.setEmail("mounika1998@gmail.com");
+		login.setEmail("mounika@gmail.com");
 		login.setPassword("mouni@1234");
 		
 		Customer customer=null;
